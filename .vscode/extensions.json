@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    // Nginx formatting
+    "raynigon.nginx-formatter",
+    // React formatting
+    "dbaeumer.vscode-eslint",
+  ]
+}

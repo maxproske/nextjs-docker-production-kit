@@ -1,0 +1,90 @@
+# `version` is now deprecated
+# https://docs.docker.com/compose/compose-file/#version-top-level-element
+
+services:
+  next-ts-app:
+    container_name: next-ts-app
+    build:
+      context: ./next-ts-app
+      dockerfile: dev.Dockerfile
+    environment:
+      ENV_VARIABLE: ${ENV_VARIABLE}
+      NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_DATABASE: ${POSTGRES_DATABASE}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./next-ts-app/src:/app/src
+      - ./next-ts-app/public:/app/public
+      # It's not necessary to sync the `.next` directory
+    depends_on:
+      - postgres
+    restart: always
+    networks:
+      - my_network
+
+  next-js-app:
+    container_name: next-js-app
+    build:
+      context: ./next-js-app
+      dockerfile: dev.Dockerfile
+    environment:
+      ENV_VARIABLE: ${ENV_VARIABLE}
+      NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_DATABASE: ${POSTGRES_DATABASE}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./next-js-app/src:/app/src
+      - ./next-js-app/public:/app/public
+      # It's not necessary to sync the `.next` directory
+    depends_on:
+      - postgres
+    restart: always
+    networks:
+      - my_network
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    volumes:
+      - ./nginx/sites-enabled:/etc/nginx/sites-enabled
+      - ./nginx/logs:/var/log/nginx
+    ports:
+      - 80:80
+      - 443:443
+      - 3000:3000
+    depends_on:
+      - next-ts-app
+      - next-js-app
+    restart: always
+    networks:
+      - my_network
+
+  postgres:
+    container_name: postgres
+    build:
+      context: ./postgres
+      dockerfile: dev.Dockerfile
+    environment:
+      # The only variable required is `POSTGRES_PASSWORD`, the rest are optional
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+    restart: always
+    networks:
+      - my_network
+
+  # Add more containers below
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+networks:
+  my_network:
+    external: true

@@ -1,0 +1,14 @@
+logs/
+
+# All except the example cert are ignored from version control
+# If you wish to add your certs to version control, change your 
+# repo to private before removing these lines:
+certs/*
+!certs/*.sh
+!certs/*.md
+!certs/example
+certs/example/accounts
+certs/example/csr
+certs/example/keys
+certs/example/renewal
+certs/example/renewal-hooks
