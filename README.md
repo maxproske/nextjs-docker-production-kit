@@ -13,7 +13,7 @@ Issues/pull requests and ⭐ stars welcome as a show of support! Keep coming bac
 
 ## Why use Compose with Next.js?
 
-Coming Soon: YouTube video
+Check out the [YouTube video](https://www.youtube.com/watch?v=-iaLmOGZuD4)!
 
 - 100% reproducable environment across macOS, Windows, and Linux teams.
 - Easy to develop, test, and run multiple Next.js apps, databases, and other services together.
