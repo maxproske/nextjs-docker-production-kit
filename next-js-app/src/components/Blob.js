@@ -15,6 +15,7 @@ export default function Blob() {
         width={48}
         height={48}
         priority={true}
+        unoptimized
       />
     </div>
   )

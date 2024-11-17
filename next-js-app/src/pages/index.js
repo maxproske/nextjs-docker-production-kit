@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Inter } from '@next/font/google'
+import { Inter } from 'next/font/google'
 import styles from 'src/styles/Home.module.css'
 import Blob from 'src/components/Blob'
 import sql from 'src/lib/postgres'

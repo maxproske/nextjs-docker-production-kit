@@ -3,7 +3,7 @@
 docker network create my_network
 
 # Build prod without multistage
-docker-compose -f docker-compose.prod-without-multistage.yml build
+docker compose -f docker-compose.prod-without-multistage.yml build
 
 # Up prod without multistage in detached mode
-docker-compose -f docker-compose.prod-without-multistage.yml up -d
+docker compose -f docker-compose.prod-without-multistage.yml up -d

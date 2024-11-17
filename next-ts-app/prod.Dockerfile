@@ -1,5 +1,5 @@
 # Step 1. Rebuild the source code only when needed
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
@@ -51,7 +51,7 @@ RUN \
 # Note: It is not necessary to add an intermediate step that does a full copy of `node_modules` here
 
 # Step 2. Production image, copy all the files and run next
-FROM node:18-alpine AS runner
+FROM node:20-alpine AS runner
 
 WORKDIR /app
 

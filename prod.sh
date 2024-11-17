@@ -3,7 +3,7 @@
 docker network create my_network
 
 # Build prod
-docker-compose -f docker-compose.prod.yml build
+docker compose -f docker-compose.prod.yml build
 
 # Up prod in detached mode
-docker-compose -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.prod.yml up -d
